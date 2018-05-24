@@ -1,0 +1,32 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+<meta charset="UTF-8">  
+<title>go server测试</title>  
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.1.js"></script>
+<script type="text/javascript">
+    function upload(){  
+        var url = "http://localhost:9000/login";
+        var src ={};
+        src["info"]=$("input").val();
+        $.ajax({
+            url: url,
+            type: 'post',
+            data:src,
+            dataTypt: 'json',
+            success: function(data){
+                    $("a").text(data);
+                },
+            error: function(xhr, msg){
+                alert(msg);
+                }
+            });
+    }   
+    </script>
+</head>
+<body>
+    输入内容:<input name="info"></input>
+    <input  type="submit"   value="提交" onclick="upload()">
+    <div>回显内容:<a></a></div>
+</body>
+</html>
