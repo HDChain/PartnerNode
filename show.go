@@ -17,7 +17,7 @@ func showeth(w http.ResponseWriter, r *http.Request) {
 		//if len(r.Form["id"]) > 0 {
 		//    fmt.Fprintln(w, r.Form["id"][0])
 		// }
-		w.Header().Set("Content-Type", "text/html; charset=gb2312")
+		w.Header().Set("Content-Type", "text/html; charset=utf-8")
 		t, err := template.ParseFiles("template/html/showeth.html")
 		if err != nil {
 			fmt.Fprintf(w, "parse template error: %s", err.Error())
@@ -34,7 +34,7 @@ func showeth(w http.ResponseWriter, r *http.Request) {
 
 func showipfs(w http.ResponseWriter, r *http.Request) {
 
-	w.Header().Set("Content-Type", "text/html; charset=gb2312")
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	t, err := template.ParseFiles("template/html/showipfs.html")
 	if err != nil {
 		fmt.Fprintf(w, "parse template error: %s", err.Error())

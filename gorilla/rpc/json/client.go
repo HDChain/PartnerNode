@@ -10,7 +10,8 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"math/rand"
+	//"log"
+	//"math/rand"
 )
 
 // ----------------------------------------------------------------------------
@@ -19,10 +20,11 @@ import (
 
 // clientRequest represents a JSON-RPC request sent by a client.
 type clientRequest struct {
+	Jsonrpc string `json:"jsonrpc"`
 	// A String containing the name of the method to be invoked.
 	Method string `json:"method"`
 	// Object to pass as request parameter to the method.
-	Params [1]interface{} `json:"params"`
+	Params interface{} `json:"params"` // [2]string //
 	// The request id. This can be of any type. It is used to match the
 	// response with the request that it is replying to.
 	Id uint64 `json:"id"`
@@ -37,11 +39,24 @@ type clientResponse struct {
 
 // EncodeClientRequest encodes parameters for a JSON-RPC client request.
 func EncodeClientRequest(method string, args interface{}) ([]byte, error) {
+
 	c := &clientRequest{
-		Method: method,
-		Params: [1]interface{}{args},
-		Id:     uint64(rand.Int63()),
+		Jsonrpc: "2.0",
+		Method:  method,
+		Params:  args,
+		Id:      1, //uint64(rand.Int63()),
 	}
+
+	//message, err := json.Marshal(c2)
+
+	//log.Output(1, string(message2))
+	/*
+		c := &clientRequest{
+			Jsonrpc: "2.0",
+			Method:  method,
+			Params:  [2]string{"0x407d73d8a49eeb85d32cf465507dd71d507100c1", "latest"}, //[1]interface{}{args},
+			Id:      1,
+		}*/
 	return json.Marshal(c)
 }
 

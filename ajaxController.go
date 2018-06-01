@@ -12,6 +12,7 @@ import (
 type Result struct {
 	Ret    int
 	Reason string
+	Res    string
 	Data   interface{}
 }
 
@@ -73,7 +74,16 @@ func (this *ajaxController) LoginAction(w http.ResponseWriter, r *http.Request) 
 }
 
 func OutputJson(w http.ResponseWriter, ret int, reason string, i interface{}) {
-	out := &Result{ret, reason, i}
+	out := &Result{ret, reason, "", i}
+	b, err := json.Marshal(out)
+	if err != nil {
+		return
+	}
+	w.Write(b)
+}
+
+func EthOutputJson(w http.ResponseWriter, ret int, reason string, res string, i interface{}) {
+	out := &Result{ret, reason, res, i}
 	b, err := json.Marshal(out)
 	if err != nil {
 		return

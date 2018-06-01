@@ -1,4 +1,4 @@
-
+﻿
 /* ==== Scroll down to find where to put your styles :) ==== */
 
 /*  HTML5 ✰ Boilerplate  */
@@ -149,7 +149,7 @@ a:hover { color: #036; }
 	color:#F00;	
 }
 
-#contact-form #submit-button {
+#contact-form #submit-button{
 	width: 100px;
 	background-color:#333;
 	color:#FFF;
@@ -304,3 +304,4 @@ input.placeholder-text, textarea.placeholder-text  {
   p, h2, h3 { orphans: 3; widows: 3; }
   h2, h3{ page-break-after: avoid; }
 }
+ 

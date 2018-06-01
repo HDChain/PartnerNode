@@ -78,7 +78,14 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 
 func NotFoundHandler(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path == "/" {
-		http.Redirect(w, r, "/login/index", http.StatusFound)
+		//http.Redirect(w, r, "/showeth", http.StatusFound)
+		w.Header().Set("Content-Type", "text/html; charset=gb2312")
+		t, err := template.ParseFiles("template/html/index.html")
+		if err != nil {
+			log.Println(err)
+		}
+		t.Execute(w, nil)
+		return
 	}
 
 	w.Header().Set("Content-Type", "text/html; charset=gb2312")
