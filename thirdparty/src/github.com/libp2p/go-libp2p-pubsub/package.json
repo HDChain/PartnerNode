@@ -1,0 +1,24 @@
+{
+  "author": "whyrusleeping",
+  "bugs": {
+    "url": "https://github.com/libp2p/go-libp2p-pubsub"
+  },
+  "gx": {
+    "dvcsimport": "github.com/libp2p/go-libp2p-pubsub"
+  },
+  "gxDependencies": [
+    {
+      "author": "whyrusleeping",
+      "hash": "QmZ4Qi3GaRbjcx28Sme5eMH7RQjGkt8wHxt2a65oLaeFEV",
+      "name": "gogo-protobuf",
+      "version": "0.0.0"
+    }
+  ],
+  "gxVersion": "1.1.1",
+  "language": "go",
+  "license": "MIT",
+  "name": "go-libp2p-pubsub",
+  "releaseCmd": "git commit -a -m \"gx publish $VERSION\"",
+  "version": "0.1.0"
+}
+
