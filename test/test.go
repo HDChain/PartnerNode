@@ -129,12 +129,26 @@ func UploadFileHandler() http.HandlerFunc {
 		io.Copy(f, file)
 
 		//调用 ipfs api，添加到ipfs，获取 hash 返回
-		filehash, err := ipfs.IpfsAdd("./upload/" + handler.Filename)
+		Filehash, err := ipfs.IpfsAdd("./upload/" + handler.Filename)
 		if err != nil {
 			w.Write([]byte("添加失败 , <a href='/showipfs'> 返回 </a> "))
 		} else {
+			//w.Header().Set("Content-Type", "text/html; charset=UTF-8")
+			//w.Write([]byte("SUCCESS, 文件hash: <h3> <font color='red'> " + Filehash + "</font></h3><a href='/showipfs'>   返回 </a> "))
+			type filedata struct {
+				Hash string
+			}
+
+			filedata1 := filedata{Hash: Filehash}
+
 			w.Header().Set("Content-Type", "text/html; charset=UTF-8")
-			w.Write([]byte("SUCCESS, 文件hash: <h3> <font color='red'> " + filehash + "</font></h3><a href='/showipfs'>   返回 </a> "))
+			t, err := template.ParseFiles("template/html/retipfsupload.html")
+			if err != nil {
+				fmt.Fprintf(w, "parse template error: %s", err.Error())
+				return
+			}
+			t.Execute(w, filedata1)
+
 		}
 	})
 }

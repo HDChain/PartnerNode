@@ -1,8 +1,8 @@
 package main
 
 import (
-	//"fmt"
-	//"html/template"
+	"fmt"
+	"html/template"
 	//"io/ioutil"
 	"log"
 	"net/http"
@@ -68,9 +68,16 @@ func ipfsfunc(w http.ResponseWriter, req *http.Request) {
 
 				ipfs.IpfsGet(hash, "./upload/a12.txt")
 
-				w.Header().Set("Content-Type", "text/html; charset=UTF-8")
-				w.Write([]byte("SUCCESS,   <h3> <font color='red'><a href='/download'> 下载 </a></font></h3> <h3> <font color='red'><a href='/files/a12.txt'>  显示 </a></font></h3><a href='/showipfs'>   返回 </a> "))
+				//w.Header().Set("Content-Type", "text/html; charset=UTF-8")
+				//w.Write([]byte("SUCCESS,   <h3> <font color='red'><a href='/download'> 下载 </a></font></h3> <h3> <font color='red'><a href='/files/a12.txt'>  显示 </a></font></h3><a href='/showipfs'>   返回 </a> "))
 
+				w.Header().Set("Content-Type", "text/html; charset=UTF-8")
+				t, err := template.ParseFiles("template/html/retipfsdownload.html")
+				if err != nil {
+					fmt.Fprintf(w, "parse template error: %s", err.Error())
+					return
+				}
+				t.Execute(w, nil)
 			}
 		}
 		/*
@@ -92,10 +99,10 @@ func main() {
 	http.Handle("/ipfs/", http.HandlerFunc(ipfsfunc))
 	http.Handle("/eth/", http.HandlerFunc(ethfunc))
 
+	webmain()
+
 	log.Println("Listening...")
 	log.Print("Server started on localhost:8081, use /upload for uploading files and /files/{fileName} for downloading files.")
-
-	webmain()
 
 	err := http.ListenAndServe(":8081", nil)
 	if err != nil {
