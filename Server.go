@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"html/template"
-	//"io/ioutil"
 	"log"
 	"net/http"
 
@@ -11,19 +10,12 @@ import (
 	"./ipfs"
 )
 
-//----------------------------------------------------------------
-
-type Handlers struct {
-}
-
-//http://localhost:8081/eth/?id=1&name=abc
 func ethfunc(w http.ResponseWriter, req *http.Request) {
 	req.ParseForm()
 	if req.Method == "GET" {
 		if len(req.Form["id"]) > 0 {
 			val := req.Form["id"][0]
 			if val == "0" {
-				// 获取函数名 和 参数
 				valfunc := req.Form["func"][0]
 				valparam1 := req.Form["param1"][0]
 				valparam2 := req.Form["param2"][0]
@@ -33,8 +25,6 @@ func ethfunc(w http.ResponseWriter, req *http.Request) {
 					log.Println(err)
 					log.Println(result)
 				}
-				//fmt.Fprintln(w, "调用成功 ", result)
-
 				EthOutputJson(w, 1, "调用成功", result, nil)
 			}
 		}
@@ -42,7 +32,6 @@ func ethfunc(w http.ResponseWriter, req *http.Request) {
 }
 
 func ipfsfunc(w http.ResponseWriter, req *http.Request) {
-	//http://localhost:8080/ipfs/QmaEswFNsf3D3Sjb2Qy9kstEZvWyL7bSknoudaxLgdFK4J
 	req.ParseForm()
 	if req.Method == "GET" {
 		if len(req.Form["id"]) > 0 {
@@ -54,17 +43,10 @@ func ipfsfunc(w http.ResponseWriter, req *http.Request) {
 				//url := "http://localhost:8080/ipfs/QmaEswFNsf3D3Sjb2Qy9kstEZvWyL7bSknoudaxLgdFK4J"
 				//http.Redirect(w, req, url, http.StatusFound)
 
-				//ipfs.Ipfsmain()
-
 				w.Write([]byte("SUCCESS"))
 			}
 			if key == "1" {
 				hash := req.Form["hash"][0]
-
-				//httpGet()
-				//fmt.Fprintf(w, "httpGet()")
-				//url := "http://localhost:8080/ipfs/QmaEswFNsf3D3Sjb2Qy9kstEZvWyL7bSknoudaxLgdFK4J"
-				//http.Redirect(w, req, url, http.StatusFound)
 
 				ipfs.IpfsGet(hash, "./upload/a12.txt")
 
@@ -80,16 +62,6 @@ func ipfsfunc(w http.ResponseWriter, req *http.Request) {
 				t.Execute(w, nil)
 			}
 		}
-		/*
-			w.Header().Set("Content-Type", "text/html; charset=gb2312")
-			t, err := template.ParseFiles("template/html/showpic.html")
-			if err != nil {
-				fmt.Fprintf(w, "parse template error: %s", err.Error())
-				return
-			}
-			t.Execute(w, nil)
-
-		*/
 	}
 
 }

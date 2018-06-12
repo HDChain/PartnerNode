@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 
-	"./test"
+	"./httpfile"
 )
 
 func webmain() {
@@ -13,7 +13,7 @@ func webmain() {
 	http.HandleFunc("/html/pics/", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, r.URL.Path[1:])
 	})
-	http.HandleFunc("/showpic", test.Showpic)
+	http.HandleFunc("/showpic", httpfile.Showpic)
 
 	http.HandleFunc("/showeth", showeth)
 	http.HandleFunc("/showipfs", showipfs)
@@ -28,11 +28,11 @@ func webmain() {
 	http.HandleFunc("/", NotFoundHandler)
 	//http.ListenAndServe(":8888", nil)
 
-	http.HandleFunc("/upload", test.UploadFileHandler())
-	fs := http.FileServer(http.Dir(test.UploadPath))
+	http.HandleFunc("/upload", httpfile.UploadFileHandler())
+	fs := http.FileServer(http.Dir(httpfile.UploadPath))
 	http.Handle("/files/", http.StripPrefix("/files", fs))
 
-	http.HandleFunc("/zipdownload", test.ZipHandler)
-	http.HandleFunc("/download", test.StaticServer)
+	http.HandleFunc("/zipdownload", httpfile.ZipHandler)
+	http.HandleFunc("/download", httpfile.StaticServer)
 
 }
