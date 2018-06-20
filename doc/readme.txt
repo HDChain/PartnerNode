@@ -24,8 +24,7 @@ protobuf
 ipfs
 mattn
 等
-3.
-
+3. 增加 p2p ，节点同步，奖励机制
 
 
 
