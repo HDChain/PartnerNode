@@ -24,6 +24,7 @@ func JRpcCall(valfunc string) (string, error) {
 		}
 	*/
 	//log.Output(1, "web3_clientVersion1")
+
 	var FuncName string
 	FuncName = valfunc //"eth_getBalance"
 	var args []string
@@ -32,6 +33,73 @@ func JRpcCall(valfunc string) (string, error) {
 	}
 	if FuncName == "eth_getBalance" {
 		args = []string{"0x407d73d8a49eeb85d32cf465507dd71d507100c1", "latest"}
+	}
+
+	if FuncName == "web3_sha3" || FuncName == "net_version" || FuncName == "net_peerCount" || FuncName == "net_listening" {
+		args = []string{}
+	}
+
+	if FuncName == "eth_protocolVersion" || FuncName == "eth_syncing" || FuncName == "eth_coinbase" || FuncName == "eth_mining" || FuncName == "eth_hashrate" {
+		args = []string{}
+	}
+
+	if FuncName == "eth_gasPrice" || FuncName == "eth_accounts" || FuncName == "eth_blockNumber" || FuncName == "eth_getBalance" || FuncName == "eth_getStorageAt" {
+		args = []string{}
+	}
+
+	if FuncName == "eth_getTransactionCount" || FuncName == "eth_getBlockTransactionCountByHash" || FuncName == "eth_getBlockTransactionCountByNumber" || FuncName == "eth_getUncleCountByBlockHash" || FuncName == "eth_getUncleCountByBlockNumber" {
+		args = []string{}
+	}
+
+	if FuncName == "eth_getCode" || FuncName == "eth_sign" || FuncName == "eth_sendTransaction" {
+		args = []string{}
+	}
+
+	if FuncName == "eth_sendRawTransaction" || FuncName == "eth_call" || FuncName == "eth_estimateGas" {
+		args = []string{}
+	}
+
+	if FuncName == "eth_getBlockByHash" || FuncName == "eth_getBlockByNumber" || FuncName == "eth_getTransactionByHash" {
+		args = []string{}
+	}
+
+	if FuncName == "eth_getTransactionByBlockHashAndIndex" || FuncName == "eth_getTransactionByBlockNumberAndIndex" || FuncName == "eth_getTransactionReceipt" {
+		args = []string{}
+	}
+
+	if FuncName == "eth_getUncleByBlockHashAndIndex" || FuncName == "eth_getUncleByBlockNumberAndIndex" || FuncName == "eth_getCompilers" {
+		args = []string{}
+	}
+
+	if FuncName == "eth_compileLLL" || FuncName == "eth_compileSolidity" || FuncName == "eth_compileSerpent" {
+		args = []string{}
+	}
+
+	if FuncName == "eth_newFilter" || FuncName == "eth_newBlockFilter" || FuncName == "eth_newPendingTransactionFilter" {
+		args = []string{}
+	}
+
+	if FuncName == "eth_uninstallFilter" || FuncName == "eth_getFilterChanges" || FuncName == "eth_getFilterLogs" {
+		args = []string{}
+	}
+
+	if FuncName == "eth_getLogs" || FuncName == "eth_getWork" || FuncName == "eth_submitWork" {
+		args = []string{}
+	}
+	if FuncName == "eth_submitHashrate" || FuncName == "db_putString" || FuncName == "db_getString" {
+		args = []string{}
+	}
+	if FuncName == "db_putHex" || FuncName == "db_getHex" || FuncName == "shh_post" {
+		args = []string{}
+	}
+	if FuncName == "shh_version" || FuncName == "shh_newIdentity" || FuncName == "shh_hasIdentity" {
+		args = []string{}
+	}
+	if FuncName == "shh_newGroup" || FuncName == "shh_addToGroup" || FuncName == "shh_newFilter" {
+		args = []string{}
+	}
+	if FuncName == "shh_uninstallFilter" || FuncName == "shh_getFilterChanges" || FuncName == "shh_getMessages" {
+		args = []string{}
 	}
 
 	message, err := json.EncodeClientRequest(FuncName, args)
