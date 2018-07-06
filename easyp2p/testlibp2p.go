@@ -201,6 +201,7 @@ func writeData(rw *bufio.ReadWriter) {
 
 }
 
+// main func,
 func main() {
 	t := time.Now()
 	genesisBlock := Block{}
